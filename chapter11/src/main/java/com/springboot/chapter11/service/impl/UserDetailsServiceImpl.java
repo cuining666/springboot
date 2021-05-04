@@ -29,6 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         // 获取用户信息
         User user = userRoleService.getUserByUserName(userName);
+        if (user == null) {
+            throw new UsernameNotFoundException("用户名不存在");
+        }
         // 获取角色信息
         List<Role> roleList = userRoleService.findRolesByUserName(userName);
         return changeToUser(user, roleList);
@@ -43,7 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             authorityList.add(authority);
         }
         // 创建UserDetails对象，设置用户名、密码和权限
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUserName(), "{noop}" + user.getPwd(), authorityList);
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPwd(), authorityList);
         return userDetails;
     }
 
