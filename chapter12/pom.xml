@@ -72,6 +72,12 @@
         </dependency>
         -->
         <!-- ActiveMQ的依赖end -->
+        <!-- RabbitMQ的依赖start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <!-- RabbitMQ的依赖end -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
