@@ -21,6 +21,7 @@ public class Chapter13WebClient {
         newUser.setNote("note_new");
         newUser.setSex(SexEnum.MALE);
         insertUser(client, newUser);
+        insertUser2(client, "13-convert-1-note");
         getUser(client, 12L);
         User upUser = new User();
         upUser.setId(11L);
@@ -110,6 +111,18 @@ public class Chapter13WebClient {
                         // 将结果体转换为一个Mono封装的数据流
                         .bodyToMono(UserVo.class);
         // 获取服务器发布的数据流，此时才会发送请求
+        UserVo user = userMono.block();
+        System.out.println("【用户名称】" + user.getUserName());
+    }
+
+    private static void insertUser2(WebClient client, String userStr) {
+        Mono<UserVo> userMono =
+                client.post()
+                        .uri("/user2/{user}", userStr)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .retrieve()
+                        .bodyToMono(UserVo.class);
         UserVo user = userMono.block();
         System.out.println("【用户名称】" + user.getUserName());
     }
