@@ -65,6 +65,16 @@ public class UserController {
         return userService.insertUser(user).map(u -> translate(u));
     }
 
+    @PutMapping("/user/name")
+    public Mono<UserVo> updateUserName(@RequestHeader("id") Long id, @RequestHeader("userName") String userName) {
+        Mono<User> userMono = userService.getUser(id);
+        User user = userMono.block();
+        if (user == null) {
+            throw new RuntimeException("找不到用户信息");
+        }
+        return updateUser(user);
+    }
+
     private UserVo translate(User user) {
         UserVo userVo = new UserVo();
         userVo.setId(user.getId());
