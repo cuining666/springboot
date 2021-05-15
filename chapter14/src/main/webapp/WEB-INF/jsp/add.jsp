@@ -25,6 +25,19 @@
                     alert(result.message);
                 })
             });
+            $("#submitRedis").click(function () {
+                var productName = $("#productName").val();
+                var stock = $("#stock").val();
+                var price = $("#price").val();
+                var params = {
+                    productName : productName,
+                    stock : stock,
+                    price : price
+                };
+                $.post("/redis/add", params, function (result) {
+                    alert(result.message);
+                })
+            });
         });
     </script>
 </head>
@@ -45,8 +58,8 @@
                 <td><input id="price" name="price" type="text"></td>
             </tr>
             <tr>
-                <td></td>
                 <td><input id="submit" type="button" value="提交"></td>
+                <td><input id="submitRedis" type="button" value="提交Redis"></td>
             </tr>
         </table>
     </form>

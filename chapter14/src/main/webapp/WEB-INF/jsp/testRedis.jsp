@@ -12,23 +12,15 @@
     <script src="../../scripts/jquery.min.js"></script>
     <script>
         $(function () {
-            // var params = {
-            //     userId : 1,
-            //     productId : 1,
-            //     quantity : 3
-            // };
-            // $.post("/purchase", params, function (result) {
-            //     alert(result.message);
-            // });
             // 并发购买
-            for (i = 0; i < 500; i++) {
+            for (i = 0; i < 10000; i++) {
                 var binfa_params = {
                     userId : 1,
-                    productId : 5,
+                    productId : 6,
                     quantity : 1
                 };
                 // 通过POST请求后端，这里的JavaScript会采用异步请求
-                $.post("/purchase", binfa_params, function (result) {});
+                $.post("/redis/purchase", binfa_params, function (result) {});
             }
         });
     </script>

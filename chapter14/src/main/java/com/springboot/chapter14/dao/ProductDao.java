@@ -25,4 +25,6 @@ public interface ProductDao {
      * @return
      */
     int decreaseProduct(@Param("id") Long id,@Param("quantity") int quantity);
+
+    int decreaseProductWithVersion(@Param("id") Long id,@Param("quantity") int quantity,@Param("version") int version);
 }

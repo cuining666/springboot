@@ -12,11 +12,14 @@
   <sql id="Base_Column_List">
     id, product_name, stock, price, version, note
   </sql>
+  <!-- 悲观锁:如果一个数据库事务读取到产品后，就将数据直接锁定，不允许别的线程进行读写操作，直至当前数据库事务完成才释放这条数据的锁 -->
+  <!-- 在SQL的最后加入了for update语句，这样在数据库事务执行的过程中，就会锁定查询出来的数据，其他的事务将不能再对其进行读写，这样就避免了数据的不一致 -->
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_product
     where id = #{id,jdbcType=INTEGER}
+    # for update
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_product
@@ -108,5 +111,12 @@
     update t_product
     set stock = stock - #{quantity,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="decreaseProductWithVersion">
+    update t_product
+    set stock = stock - #{quantity,jdbcType=INTEGER},
+        version = version + 1
+    where id = #{id,jdbcType=INTEGER}
+      and version = #{version,jdbcType=INTEGER}
   </update>
 </mapper>
