@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.chapter14.dao.PurchaseRecordDao">
+  <resultMap id="BaseResultMap" type="com.springboot.chapter14.pojo.PurchaseRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="sum" jdbcType="DECIMAL" property="sum" />
+    <result column="purchase_date" jdbcType="TIMESTAMP" property="purchaseDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, product_id, price, quantity, sum, purchase_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_purchase_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_purchase_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.chapter14.pojo.PurchaseRecord">
+    insert into t_purchase_record (id, user_id, product_id, 
+      price, quantity, sum, 
+      purchase_date)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, #{sum,jdbcType=DECIMAL}, 
+      #{purchaseDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.chapter14.pojo.PurchaseRecord">
+    insert into t_purchase_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="sum != null">
+        sum,
+      </if>
+      <if test="purchaseDate != null">
+        purchase_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="sum != null">
+        #{sum,jdbcType=DECIMAL},
+      </if>
+      <if test="purchaseDate != null">
+        #{purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.chapter14.pojo.PurchaseRecord">
+    update t_purchase_record
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="sum != null">
+        sum = #{sum,jdbcType=DECIMAL},
+      </if>
+      <if test="purchaseDate != null">
+        purchase_date = #{purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.chapter14.pojo.PurchaseRecord">
+    update t_purchase_record
+    set user_id = #{userId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      quantity = #{quantity,jdbcType=INTEGER},
+      sum = #{sum,jdbcType=DECIMAL},
+      purchase_date = #{purchaseDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
