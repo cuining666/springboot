@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: zuul
+  redis:
+    jedis:
+      pool:
+        min-idle: 5
+        max-idle: 10
+        max-active: 10
+        max-wait: 2000
+    port: 6379
+    host: 192.168.56.102
+    password: root
+    timeout: 1000
+server:
+  #localhost代表的是请求Zuul服务，因为采用的是默认的80端口，所以浏览器地址栏可以不给出端口
+  #而在/user/timeout中，user代表用户微服务ID(Service ID)，而timeout是请求路径，这样Zuul就会将请求转发到用户微服务
+  port: 80
+
+zuul:
+  routes:
+    #用户微服务映射规则
+    #指定ANT风格的URL匹配
+    user-service:
+      path: /u/**
+      #指定映射的服务用户地址，这样Zuul就会将请求转发到用户微服务上了
+      url: http://locahost:8001/
+    #产品微服务映射规则
+    product-service:
+      path: /p/**
+      #映射产品服务中心服务ID, Zuul会自动使用服务端负载均衡，分摊请求
+      serviceId: product
+#注册给服务治理中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+#请求就会转发给端口为8001的用户微服务。但是，这样配置有一个弊端，
+#因为我们的用户微服务有两个节点，一个是8001端口，另一个是8002端口，这里只能映射到8001
+#端口的微服务，而映射不到8002端口的微服务。为了解决这个问题，Zuul还提供了面向服务的配置。
+#再看到代码中的产品微服务映射配置，这里使用了zuul.routes.<key>.path和zuul.routes.<key>.serviceld
+#进行配置，其中path的配置可参考用户微服务，而serviceld这里配置为“ product ”，这是一个产品
+#微服务的名称，由产品微服务的属性spring.application.name配置
+#http://localhost/p/product/ribbon
+

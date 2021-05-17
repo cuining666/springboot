@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: hystrix_dashboard
+server:
+  port: 6001
