@@ -1,0 +1,28 @@
+spring:
+  application:
+    #spring项目名称
+    #如果有第二个微服务节点启动时，也是将这个配置设为server，那么Spring Cloud就会认为它也是server这个微服务的一个节点
+    name: server
+server:
+  port: 7001
+eureka:
+  instance:
+    #Eureka注册服务器名称
+    hostname: localhost
+  client:
+    #是否注册给服务中心
+    #属性eureka.client.register-with-eureka配置为false，是因为在默认的情况下，项目会自动地查找服务治理中心去注册
+    #这里项目自身就是服务治理中心，所以取消掉注册服务中心
+    register-with-eureka: false
+    #是否检索服务
+    #属性eureka.client.fetch-registry配置为false，它是一个检索服务的功能，因为服务治理中心是维护服务实例的，所以也不需要这个功能
+    fetch-registry: false
+    service-url:
+      #治理客户端服务域
+      #属性eureka.client.service-url.defaultZone代表服务中心的域，将来可以提供给别的微服务注册
+      defaultZone: http://localhost:7001/eureka/
+#配置多个服务治理中心节点
+#这里依旧使用7001端口启用服务治理中心，而微服务名称依旧为server。
+#对于属性eureka.client.service-url.defaultZone则配置了7002端口的服务域，这个服务指向的是第二个服务治理中心。
+#为了让7002端口也存在服务治理中心，可以修改spring.application.name依旧配置为sever，而端口修改为了7002。
+#与此同时，配置的注册微服务治理域为7001端口，这样就可以使得7002端口的服务治理中心被注册到7001的服务治理中心。

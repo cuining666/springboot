@@ -1,0 +1,21 @@
+spring:
+  application:
+    #spring项目名称
+    name: user
+server:
+  #服务器端口
+  port: 8002
+eureka:
+  client:
+    availability-zones:
+      #可用区列表，key为region，value为zone
+      region1: defaultZone
+    #所在区域，通过这个读取availability-zones获取zone，然后通过zone读取service-url获取对应的eureka url
+    #这里的逻辑对应的类是ConfigClusterResolver和ZoneAffinityClusterResolver
+    region: region1
+    service-url:
+      #治理客户端服务域
+      #属性eureka.client.service-url.defaultZone代表服务中心的域，将来可以提供给别的微服务注册
+      #默认eureka集群,这里必须是defaultZone，不能用-替换大写，与其他的配置不一样，因为实在EurekaClientConfigBean里面写死的
+      defaultZone: http://localhost:7001/eureka/
+      zone1: http://localhost:7002/eureka/
