@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 数据库的驱动包路径 -->
+    <classPathEntry location="D:\Dev\IdeaProjects\mysql-connector-java-8.0.23.jar" />
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!-- 去掉生成文件中的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库链接URL、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.56.102:3306/test"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 当前项目下 .\-->
+        <javaModelGenerator targetPackage="com.springboot.infrastructure.pojo" targetProject=".\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="false" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="mapper"  targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        <!--<sqlMapGenerator targetPackage="com.springboot.chapter6.dao"  targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>-->
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.springboot.infrastructure.dao" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!-- 要对那些数据表进行生成操作，必须要有一个，禁止生成example类. -->
+        <table tableName="t_item" domainObjectName="Item" schema="" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>
