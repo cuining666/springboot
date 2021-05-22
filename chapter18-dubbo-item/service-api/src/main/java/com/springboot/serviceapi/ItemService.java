@@ -7,5 +7,5 @@ public interface ItemService {
 
     int getItemStock(int itemId);
 
-    void reduceStock(int itemId, int quantity);
+    boolean reduceStock(int itemId, int quantity);
 }
