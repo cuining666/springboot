@@ -3,12 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.springboot</groupId>
+        <groupId>com.springboot.item</groupId>
         <artifactId>chapter18-dubbo-item</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.springboot</groupId>
     <artifactId>service-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>service-api</name>
@@ -19,7 +18,7 @@
     <dependencies>
         <!-- 内部依赖 -->
         <dependency>
-            <groupId>com.springboot</groupId>
+            <groupId>com.springboot.item</groupId>
             <artifactId>infrastructure</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
