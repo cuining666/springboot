@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Repository;
 
 @SpringBootApplication(scanBasePackages = "com.springboot")
-@MapperScan(basePackages = "com.springboot.infastructure", annotationClass = Repository.class)
+@MapperScan(basePackages = "com.springboot.infrastructure", annotationClass = Repository.class)
 @ImportResource("classpath:dubbo-*.xml")
 public class StartApplication {
 

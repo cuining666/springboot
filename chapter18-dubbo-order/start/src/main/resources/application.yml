@@ -1,6 +1,10 @@
 spring:
   application:
     name: order
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   datasource:
     username: root
     password: root
@@ -12,7 +16,7 @@ spring:
       min-idle: 5
     type: com.alibaba.druid.pool.DruidDataSource
 server:
-  port: 8080
+  port: 8081
 mybatis:
   mapper-locations: /mapper/*.xml
   type-aliases-package: com.springboot.infrastructure.pojo
@@ -29,7 +33,7 @@ dubbo:
     timeout: 30000
   protocol:
     name: dubbo
-    port: 20880
+    port: 20881
   #开启包扫描，可替代@EnableDubbo注解
 #  scan:
 #    base-packages: com.springboot.service
