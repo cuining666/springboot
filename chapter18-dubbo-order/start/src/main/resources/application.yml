@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: order
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.56.102:3306/test
+    druid:
+      max-active: 50
+      max-wait: 10000
+      initial-size: 5
+      min-idle: 5
+    type: com.alibaba.druid.pool.DruidDataSource
+server:
+  port: 8080
+mybatis:
+  mapper-locations: /mapper/*.xml
+  type-aliases-package: com.springboot.infrastructure.pojo
+logging:
+  config: start/src/main/resources/logback.xml
+  level:
+    root: info
+dubbo:
+  application:
+    name: order
+  registry:
+    protocol: zookeeper
+    address: zookeeper://192.168.56.102:2181
+    timeout: 30000
+  protocol:
+    name: dubbo
+    port: 20880
+  #开启包扫描，可替代@EnableDubbo注解
+#  scan:
+#    base-packages: com.springboot.service
