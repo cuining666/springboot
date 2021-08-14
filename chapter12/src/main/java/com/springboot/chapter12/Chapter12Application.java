@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 // 注解驱动定时任务
-@EnableScheduling
+//@EnableScheduling
 public class Chapter12Application {
 
     // 消息队列名称

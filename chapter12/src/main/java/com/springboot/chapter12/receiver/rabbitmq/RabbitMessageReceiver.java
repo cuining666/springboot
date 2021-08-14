@@ -1,4 +1,4 @@
-package com.springboot.chapter12.rabbit.receiver;
+package com.springboot.chapter12.receiver.rabbitmq;
 
 import com.springboot.chapter12.pojo.User;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

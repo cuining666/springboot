@@ -78,6 +78,13 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
         <!-- RabbitMQ的依赖end -->
+        <!-- RocketMQ的依赖start -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <!-- RocketMQ的依赖end -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
